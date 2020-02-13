@@ -24,7 +24,7 @@ public class SubsamplingFilter implements BlueprintFilter {
             for (int i = 1; i < sps.size(); i+=2) ps.add(sps.get(i));
             Point[] points=new Point[ps.size()];
             for (int i = 0; i < ps.size(); i++) points[i]=ps.get(i);
-            newBps.add(new Blueprint(blueprint.getName(),blueprint.getAuthor(),points));
+            newBps.add(new Blueprint(blueprint.getAuthor(),blueprint.getName(),points));
         }
         return newBps;
     }

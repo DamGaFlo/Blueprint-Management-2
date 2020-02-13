@@ -36,8 +36,9 @@ public class BlueprintsServices {
         bpp.saveBlueprint(bp);
     }
     
+    
     public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException {
-        return bf.filter(bpp.getBlueprints());
+        return bpp.getBlueprints();
     }
     
     /**
@@ -48,10 +49,7 @@ public class BlueprintsServices {
      * @throws BlueprintNotFoundException if there is no such blueprint
      */
     public Blueprint getBlueprint(String author,String name) throws BlueprintNotFoundException{
-        Set<Blueprint> s=new HashSet<Blueprint>();
-        s.add(bpp.getBlueprint(author, name));
-        s=bf.filter(s);
-        return (Blueprint) s.toArray()[0];
+        return bpp.getBlueprint(author, name);
     }
     
     /**
@@ -61,7 +59,14 @@ public class BlueprintsServices {
      * @throws BlueprintNotFoundException if the given author doesn't exist
      */
     public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException{
-        return bf.filter(bpp.getBlueprintsByAuthor(author));
+        return bpp.getBlueprintsByAuthor(author);
     }
+
+
+    public Set<Blueprint> filter(Set<Blueprint> bps){
+        return bf.filter(bps);
+    }
+
+	
     
 }

@@ -29,7 +29,7 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence {
     public InMemoryBlueprintPersistence() {
         // load stub data
         Point[] pts = new Point[] { new Point(140, 140), new Point(115, 115) };
-        Blueprint bp = new Blueprint("_authorname_", "_bpname_ ", pts);
+        Blueprint bp = new Blueprint("_authorname_", "_bpname_", pts);
         blueprints.put(new Tuple<>(bp.getAuthor(), bp.getName()), bp);
 
     }
@@ -61,8 +61,13 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence {
         for(Blueprint bp : blueprints.values()){
             if(bp.getAuthor().equals(author)) bps.add(bp);
         }
+        if (bps.isEmpty()){
+            throw new BlueprintNotFoundException("Autor no encontrado");
+        }
         return bps;
     }
+
+    
 
     
     
