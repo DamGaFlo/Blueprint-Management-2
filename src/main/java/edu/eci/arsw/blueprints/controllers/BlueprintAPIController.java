@@ -77,4 +77,20 @@ public class BlueprintAPIController {
 
     }
 
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/blueprints/{author}/{name}")
+    public ResponseEntity<?> addNewBlueprint(@RequestBody Blueprint bp, @PathVariable String author, @PathVariable String name) {
+        try {
+            if(!bp.getAuthor().equals(author) || !bp.getName().equals(name)) return new ResponseEntity<>("Datos inconsistentes", HttpStatus.FORBIDDEN);
+            Blueprint consultbp = bps.getBlueprint(author, name);
+            consultbp.setPoints(bp.getPoints());
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (Exception ex) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Blueprint no encontrado", HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+
 }
